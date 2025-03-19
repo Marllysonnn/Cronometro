@@ -22,6 +22,12 @@
     <button><img src="icon/pause.png" alt="stop"></button>
     <button><img src="icon/play.png" alt="play" style="rotate: 180deg"></button>
   </div>
+  <div class="volume-container">
+    <label for="volume-range"><img src="icon/volume.png" alt=""></label>
+    <input type="range" id="volume-range" min="0" max="100" value="50">
+    <span id="volume-level">50%</span>
+  </div>
+  <audio id="alarm-sound" src="alarm-clock-90867.mp3" preload="auto"></audio>
   <script src="script.js"></script>
 </body>
 </html>

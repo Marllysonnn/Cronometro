@@ -4,6 +4,7 @@ let isEditing = false;
 
 const inputs = document.querySelectorAll("#hours, #minutes, #seconds");
 const editButton = document.querySelector("button img[alt='edit']").parentElement;
+const alarmSound = document.getElementById("alarm-sound");
 
 function startTimer() {
     if (isRunning || isEditing) return;
@@ -22,6 +23,7 @@ function startTimer() {
         if (totalSeconds <= 0) {
             clearInterval(countdown);
             isRunning = false;
+            alarmSound.play();
             return;
         }
 
@@ -108,6 +110,15 @@ editButton.addEventListener("click", () => {
         input.classList.remove("running");
         input.disabled = !isEditing;
     });
+});
+
+const volumeSlider = document.getElementById('volume-range');
+const volumeLevel = document.getElementById('volume-level');
+
+volumeSlider.addEventListener('input', () => {
+  const volume = volumeSlider.value;
+  volumeLevel.textContent = volume + "%";
+  alarmSound.volume = volume / 100;
 });
 
 window.addEventListener("DOMContentLoaded", () => {

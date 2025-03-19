@@ -103,6 +103,41 @@
   input.running {
     color: var(--timer-color);
   }
+
+  .volume-container {
+    position: absolute;
+    bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  label{
+    font-size: 26px;
+
+    img{
+        width: 24px;
+    }
+  }
+  
+  #volume-range {
+    width: 500px;
+    margin: 1px 0;
+  }
+  
+  #volume-level {
+    font-size: 20px;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--play-color);
+    cursor: pointer;
+  }
   
   @media (max-width: 480px) {
     body{
@@ -175,4 +210,10 @@
         justify-content: center;
         align-items: center;
       }
+
+      .volume-container {
+        width: 80%;
+        bottom: 46px;
+      }
     }
+      
