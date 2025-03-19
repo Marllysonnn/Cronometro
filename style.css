@@ -108,7 +108,7 @@
         gap: 64px;
     }
     * {
-        font-size: 76px;
+        font-size: 86px;
       }
       .timer {
         width: 50%;
@@ -146,9 +146,9 @@
       }
       .h::after{
         content: "h";
-        position: absolute;
-        left: 65%;
-        top: 22%;
+        position: relative;
+        left: 48%;
+        top: -35%;
         font-size: 20px;
         display: flex;
         justify-content: center;
@@ -156,9 +156,9 @@
       }
       .m::after{
         content: "m";
-        position: absolute;
-        left: 65%;
-        top: 35%;
+        position: relative;
+        left: 48%;
+        top: -35%;
         font-size: 20px;
         display: flex;
         justify-content: center;
@@ -166,9 +166,9 @@
       }
       .s::after{
         content: "s";
-        position: absolute;
-        left: 65%;
-        top: 48%;
+        position: relative;
+        left: 48%;
+        top: -37%;
         font-size: 20px;
         display: flex;
         justify-content: center;
