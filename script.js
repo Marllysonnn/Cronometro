@@ -81,6 +81,16 @@ function updateInputs(totalSeconds) {
     let m = Math.floor((totalSeconds % 3600) / 60);
     let s = totalSeconds % 60;
 
+    while (m >= 60) {
+        h++;
+        m -= 60;
+    }
+
+    while (s >= 60) {
+        m++;
+        s -= 60;
+    }
+
     document.getElementById("hours").value = h.toString().padStart(2, "0");
     document.getElementById("minutes").value = m.toString().padStart(2, "0");
     document.getElementById("seconds").value = s.toString().padStart(2, "0");
