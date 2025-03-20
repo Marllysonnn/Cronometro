@@ -1,221 +1,254 @@
 :root {
-    --background-color: #1b3442;
-    --timer-color: #46e8b2;
-    --edit-color: #bfcfc6;
-    --play-color: #4cc89c;
-    --stop-color: #d65d65;
-    --continue-color: #c0d357;
+  --background-color: #1b3442;
+  --timer-color: #46e8b2;
+  --edit-color: #bfcfc6;
+  --play-color: #4cc89c;
+  --stop-color: #d65d65;
+  --continue-color: #c0d357;
+}
+
+@font-face {
+  font-family: "Endless";
+  src: url("EndlessSunriseExtra.ttf");
+}
+
+* {
+  font-family: "Endless";
+  font-size: 102px;
+  margin: 0;
+  color: var(--timer-color);
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: auto;
+  background-color: var(--background-color);
+}
+
+.timer {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.timer input {
+  width: 216px;
+  border: none;
+  background-color: var(--background-color);
+}
+
+.timer input:focus {
+  outline: auto;
+  border: solid var(--play-color);
+}
+
+input:disabled {
+  color: var(--timer-color);
+  cursor: not-allowed;
+}
+
+.timer h1 {
+  margin-bottom: 16px;
+}
+
+.btn {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: start;
+  gap: 8px;
+}
+
+.btn button.active {
+  background-color: var(--background-color);
+  color: white;
+  border: 2px solid var(--play-color);
+}
+
+.btn button.active:hover {
+  background-color: #00000030;
+}
+
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
   }
-  
-  @font-face {
-    font-family: "Endless";
-    src: url("EndlessSunriseExtra.ttf");
+  to {
+    transform: rotate(360deg);
   }
-  
-  * {
-    font-family: "Endless";
-    font-size: 102px;
-    margin: 0;
-    color: var(--timer-color);
+}
+
+.btn button:nth-child(1):focus img {
+  animation: rotate360 1s linear;
+}
+
+
+button,
+#less,
+#more {
+  width: 24px;
+  user-select: none;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid var(--edit-color) 3px;
+  border-radius: 50%;
+  padding: 18px;
+  cursor: pointer;
+  background-color: var(--background-color);
+}
+
+button img,
+#less img,
+#more img {
+  width: 20px;
+  height: 20px;
+}
+
+button h1,
+#less h1,
+#more h1 {
+  font-size: 32px;
+  margin-bottom: 4px;
+  margin-left: 1px;
+}
+
+.editing {
+  color: #ffcc00;
+  border: solid var(--edit-color);
+}
+
+input.editing {
+  color: var(--continue-color);
+}
+
+input.running {
+  color: var(--timer-color);
+}
+
+.volume-container {
+  position: absolute;
+  bottom: 50px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+label {
+  font-size: 26px;
+
+  img {
+    width: 24px;
   }
-  
+}
+
+#volume-range {
+  width: 500px;
+  margin: 1px 0;
+}
+
+#volume-level {
+  font-size: 20px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--play-color);
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
   body {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin: auto;
-    background-color: var(--background-color);
+    justify-content: space-evenly;
+    overflow: hidden;
   }
-  
   .timer {
     width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .timer input {
-    width: 216px;
-    border: none;
-    background-color: var(--background-color);
-  }
-  
-  .timer input:focus {
-    outline: auto;
-    border: solid var(--play-color);
+    flex-direction: column;
+    gap: 1px;
+    margin-top: 8%;
   }
 
-  input:disabled {
-    color: var(--timer-color);
-    cursor: not-allowed;
-  }  
-  
-  .timer h1 {
-    margin-bottom: 16px;
+  .timer div {
+    height: 75px;
   }
-  
+
+  .timer input {
+    width: 188px;
+    font-size: 70px;
+  }
+  .point {
+    display: none;
+  }
+
   .btn {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    align-items: start;
-    gap: 8px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
   }
-  
-  button, #less, #more {
-    width: 24px;
-    user-select: none;
-    height: 24px;
+
+  button {
+    width: 60px;
+    height: 60px;
+  }
+
+  #less,
+  #more {
+    position: absolute;
+    margin-top: 25%;
+  }
+
+  #less {
+    margin-left: -75%;
+  }
+  #more {
+    margin-left: 75%;
+  }
+  .h::after {
+    content: "h";
+    position: relative;
+    left: 38%;
+    top: -60%;
+    font-size: 20px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    border: solid var(--edit-color) 3px;
-    border-radius: 50%;
-    padding: 18px;
-    cursor: pointer;
-    background-color: var(--background-color);
+    align-items: center;
   }
-  
-  button img, #less img, #more img {
-    width: 20px;
-    height: 20px;
+  .m::after {
+    content: "m";
+    position: relative;
+    left: 38%;
+    top: -60%;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  
-  button h1, #less h1, #more h1 {
-    font-size: 32px;
-    margin-bottom: 3.5px;
-    margin-left: 1px;
-  }
-  
-  .editing {
-    color: #ffcc00;
-    border: solid var(--edit-color);
-  }
-  
-  input.editing {
-    color: var(--continue-color);
-  }
-  
-  input.running {
-    color: var(--timer-color);
+  .s::after {
+    content: "s";
+    position: relative;
+    left: 38%;
+    top: -60%;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .volume-container {
-    position: absolute;
-    bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+    position: relative;
+    width: 80%;
+    bottom: 26px;
   }
-
-  label{
-    font-size: 26px;
-
-    img{
-        width: 24px;
-    }
-  }
-  
-  #volume-range {
-    width: 500px;
-    margin: 1px 0;
-  }
-  
-  #volume-level {
-    font-size: 20px;
-  }
-
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--play-color);
-    cursor: pointer;
-  }
-  
-  @media (max-width: 480px) {
-    body{
-        gap: 34px;
-        justify-content: start;
-        margin-top: 70px;
-    }
-    * {
-        font-size: 86px;
-      }
-      .timer {
-        width: 50%;
-        flex-direction: column;
-        gap: 1px;
-      }
-      
-      .timer input {
-        width: 200px;
-      } 
-      .point {
-        display: none;
-      }
-      
-      .btn {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 32px;
-      }
-      
-      button, #less, #more {
-        width: 60px;
-        height: 60px;
-      }
-
-      #less, #more{
-        position: absolute;
-        margin-top: 15px;
-      }
-
-      #less{
-        margin-left: -70%;
-      }
-      #more{
-        margin-left: 70%;
-      }
-      .h::after{
-        content: "h";
-        position: relative;
-        left: 48%;
-        top: -35%;
-        font-size: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .m::after{
-        content: "m";
-        position: relative;
-        left: 48%;
-        top: -35%;
-        font-size: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .s::after{
-        content: "s";
-        position: relative;
-        left: 48%;
-        top: -37%;
-        font-size: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .volume-container {
-        width: 80%;
-        bottom: 46px;
-      }
-    }
-      
+}

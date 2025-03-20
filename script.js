@@ -2,9 +2,15 @@ let countdown;
 let isRunning = false;
 let isEditing = false;
 
+document.getElementById("hours").value = "00";
+document.getElementById("minutes").value = "00";
+document.getElementById("seconds").value = "00";
+
 const inputs = document.querySelectorAll("#hours, #minutes, #seconds");
 const editButton = document.querySelector("button img[alt='edit']").parentElement;
 const alarmSound = document.getElementById("alarm-sound");
+const startButton = document.querySelector(".btn button:nth-child(4)");
+const stopButton = document.querySelector(".btn button:nth-child(3)");
 
 function startTimer() {
     if (isRunning || isEditing) return;
@@ -13,6 +19,8 @@ function startTimer() {
     if (totalSeconds <= 0) return;
 
     isRunning = true;
+    startButton.classList.add("active");
+    stopButton.classList.remove("active");
 
     inputs.forEach(input => {
         input.classList.remove("editing");
@@ -24,6 +32,7 @@ function startTimer() {
             clearInterval(countdown);
             isRunning = false;
             alarmSound.play();
+            resetButtonState();
             return;
         }
 
@@ -35,13 +44,29 @@ function startTimer() {
 function stopTimer() {
     clearInterval(countdown);
     isRunning = false;
+    startButton.classList.remove("active");
+    stopButton.classList.add("active");
+}
+
+function animateReset() {
+    let totalSeconds = getTotalSeconds();
+
+    if (totalSeconds === 0) return; // Se já estiver em zero, não faz nada
+
+    let interval = setInterval(() => {
+        if (totalSeconds <= 0) {
+            clearInterval(interval);
+            return;
+        }
+        
+        totalSeconds -= Math.ceil(totalSeconds / 10); // Diminui em passos decrescentes
+        updateInputs(totalSeconds);
+    }, 20); // Velocidade da animação (50ms por atualização)
 }
 
 function resetTimer() {
     stopTimer();
-    document.getElementById("hours").value = "00";
-    document.getElementById("minutes").value = "00";
-    document.getElementById("seconds").value = "00";
+    animateReset(); // Inicia a animação até chegar a 00:00:00
 }
 
 function getTotalSeconds() {
@@ -65,6 +90,11 @@ function modifyTime(amount) {
     let totalSeconds = getTotalSeconds() + amount;
     if (totalSeconds < 0) totalSeconds = 0;
     updateInputs(totalSeconds);
+}
+
+function resetButtonState() {
+    startButton.classList.remove("active");
+    stopButton.classList.remove("active");
 }
 
 let modifyInterval;
@@ -103,6 +133,9 @@ editButton.addEventListener("click", () => {
 
     if (isEditing) {
         stopTimer();
+        editButton.classList.add("active"); // Adiciona a sinalização de edição
+    } else {
+        editButton.classList.remove("active"); // Remove a sinalização de edição
     }
 
     inputs.forEach(input => {
