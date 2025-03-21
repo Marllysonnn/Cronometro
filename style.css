@@ -40,7 +40,7 @@ body {
 }
 
 .timer input {
-  width: 216px;
+  width: 225px;
   border: none;
   background-color: var(--background-color);
 }
@@ -89,6 +89,9 @@ input:disabled {
   animation: rotate360 1s linear;
 }
 
+.btn button:nth-child(4) img {
+  margin-left: 4px;
+}
 
 button,
 #less,
